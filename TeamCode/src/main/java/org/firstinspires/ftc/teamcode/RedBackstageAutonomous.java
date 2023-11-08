@@ -4,6 +4,8 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
+
 @Autonomous(name="Red Backstage Auto", group="Autonomous")
 public class RedBackstageAutonomous extends LinearOpMode {
     @Override
