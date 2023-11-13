@@ -5,14 +5,14 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Robot {
-    private MecanumDrive drivetrain;
+    public MecanumDrive drive;
     private Camera camera;
 
-    public Robot(HardwareMap hardwareMap, Pose2d pose){
-        drivetrain = new MecanumDrive(hardwareMap, pose);
+    public DroneLauncher droneLauncher;
 
-    }
-    public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
-        return drivetrain.actionBuilder(beginPose);
+    public Robot(HardwareMap hardwareMap, Pose2d pose){
+        drive = new MecanumDrive(hardwareMap, pose);
+        droneLauncher = new DroneLauncher(hardwareMap);
+
     }
 }
