@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 public class DriverOpMode extends LinearOpMode {
+
     @Override
     public void runOpMode() throws InterruptedException {
         Robot gRex = new Robot(hardwareMap, new Pose2d(0, 0, 0));
@@ -24,7 +25,7 @@ public class DriverOpMode extends LinearOpMode {
                     -gamepad1.right_stick_x
             ));
 
-            if(gamepad1.left_bumper){
+            if (gamepad1.left_bumper){
                 gRex.droneLauncher.launch();
             }
 
