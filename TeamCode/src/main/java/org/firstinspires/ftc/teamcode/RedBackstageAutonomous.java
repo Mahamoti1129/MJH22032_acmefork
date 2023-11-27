@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Vector2d;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -9,8 +11,8 @@ import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 @Autonomous(name="Red Backstage Auto", group="Autonomous")
 public class RedBackstageAutonomous extends LinearOpMode {
-
-    private final Pose2d STARTING_POSITION = new Pose2d(65,12,Math.toRadians(270));
+    private final Pose2d STARTING_POSITION = new Pose2d(12, -60, Math.PI/2);
+    private final Vector2d PARKING_POSITION = new Vector2d(60, -60);
     @Override
     public void runOpMode() throws InterruptedException {
         Robot gRex = new Robot(hardwareMap, STARTING_POSITION);
@@ -19,9 +21,10 @@ public class RedBackstageAutonomous extends LinearOpMode {
         while (!isStarted() && !isStopRequested()){
         }
 
-        gRex.drive.actionBuilder(STARTING_POSITION)
-                .lineToX(3) // get off of wall
-                .lineToY(24) // park backstage
-                .build();
+        Actions.runBlocking(
+                gRex.drive.actionBuilder(STARTING_POSITION)
+                        .strafeTo(PARKING_POSITION)
+                        .build()
+        );
     }
 }

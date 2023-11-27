@@ -25,9 +25,9 @@ public class DriverOpMode extends LinearOpMode {
                     -gamepad1.right_stick_x
             ));
 
-            if (gamepad1.left_bumper){
-                gRex.droneLauncher.launch();
-            }
+//TODO            if (gamepad1.left_bumper){
+//                gRex.droneLauncher.launch();
+//            }
 
             gRex.drive.updatePoseEstimate();
 
