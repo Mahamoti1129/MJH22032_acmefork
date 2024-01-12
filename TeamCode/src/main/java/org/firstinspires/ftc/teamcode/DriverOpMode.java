@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -14,6 +16,7 @@ public class DriverOpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Robot gRex = new Robot(hardwareMap, new Pose2d(0, 0, 0));
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         waitForStart();
 
@@ -32,10 +35,17 @@ public class DriverOpMode extends LinearOpMode {
             }
 */
 
-            if (gamepad2.left_trigger > 0){
-                gRex.arm.moveArm(gamepad2.left_trigger);
-            }else if (gamepad2.right_trigger > 0){
-                gRex.arm.moveArm(-gamepad2.right_trigger);
+            if (gamepad2.left_stick_x > 0){
+                gRex.arm.setTargetUp(gamepad2.left_stick_x);
+            }else if (gamepad2.left_stick_x < 0){
+                gRex.arm.setTargetDown(gamepad2.left_stick_x);
+            }
+            gRex.arm.moveArm();
+
+            if (gamepad2.right_bumper){
+                gRex.arm.moveWristUp();
+            }else if (gamepad2.left_bumper){
+                gRex.arm.moveWristDown();
             }
 
             gRex.drive.updatePoseEstimate();
@@ -44,6 +54,12 @@ public class DriverOpMode extends LinearOpMode {
             telemetry.addData("y", gRex.drive.pose.position.y);
             telemetry.addData("heading", gRex.drive.pose.heading);
 
+            telemetry.addData("left trigger", gamepad2.left_trigger);
+            telemetry.addData("right trigger", gamepad2.right_trigger);
+            telemetry.addData("arm position", gRex.arm.getCurrentPosition());
+
+            telemetry.addData("left bumper", gamepad2.left_bumper);
+            telemetry.addData("right bumper", gamepad2.right_bumper);
             telemetry.update();
         }
     }

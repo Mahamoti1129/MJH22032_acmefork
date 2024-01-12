@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
@@ -7,26 +8,32 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 @Config
 public class Arm extends SubsystemBase {
     private final Servo wristServo;
     private final DcMotorEx armMotor;
     public static class ArmPidControllerConstants {
-        public double p, i, d, f;
+        public double p = 0.003, i, d, f = 0.001;
     }
     public static ArmPidControllerConstants ARM_PID_PARAMS = new ArmPidControllerConstants();
 
     private final PIDFController armPidController;
 
-    public final int armBottom;
-    public final int armTop;
+    public static double target;
+    public static int armBottom = 70;
+    public static int armTop = 185;
+    public static int verticalPos = 250;
+
+    public static double wristMoveStep = 0.015;
 
     public Arm(HardwareMap hardwareMap){
         wristServo = hardwareMap.get(Servo.class, "wristServo");
-        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
+        wristServo.setPosition(0.0);
 
-        armBottom = armMotor.getCurrentPosition();
-        armTop = armBottom + 100;
+        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
+        target = 0;
 
         armPidController = new PIDFController(
                 ARM_PID_PARAMS.p, ARM_PID_PARAMS.i,
@@ -34,20 +41,37 @@ public class Arm extends SubsystemBase {
             );
     }
 
-    public void moveArm(double input){
+    public void setTargetUp(double input){
+        target += ((armTop - target) * input);
+    }
+    public void setTargetDown(double input){
+        target -= ((target - armBottom) * input);
+    }
+    public void moveArm(){
         int armPos = armMotor.getCurrentPosition();
-        double currentPos = armMotor.getCurrentPosition() - armBottom;
-        double target;
-
-        if (input > 0){
-            target = currentPos + ((armTop - currentPos) * input);
-        }else if (input < 0) {
-            target = currentPos - ((currentPos - armBottom) * input);
-        }else return;
-
         armPidController.setPIDF(ARM_PID_PARAMS.p, ARM_PID_PARAMS.i, ARM_PID_PARAMS.d, ARM_PID_PARAMS.f);
         double pid = armPidController.calculate(armPos, target);
-
         armMotor.setPower(pid);
+
+        Telemetry telemetry = FtcDashboard.getInstance().getTelemetry();
+        telemetry.addData("arm pid", pid);
+        telemetry.addData("arm currentPos", armPos);
+        telemetry.addData("arm target", target);
+
+        telemetry.addData("wristServoPos", wristServo.getPosition());
+
+        telemetry.update();
+    }
+
+    public int getCurrentPosition() {
+        return armMotor.getCurrentPosition();
+    }
+
+    public void moveWristDown(){
+        wristServo.setPosition(wristServo.getPosition()+wristMoveStep);
+    }
+    public void moveWristUp(){
+//        wristServo.setPosition(Math.max(wristServo.getPosition()-wristMoveStep, 0.3));
+        wristServo.setPosition(wristServo.getPosition()-wristMoveStep);
     }
 }

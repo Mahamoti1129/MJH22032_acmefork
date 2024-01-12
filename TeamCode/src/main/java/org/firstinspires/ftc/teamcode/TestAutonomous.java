@@ -46,7 +46,8 @@ public class TestAutonomous extends LinearOpMode {
                 gRex.drive.actionBuilder(STARTING_POSITION)
                         .lineToY(TOKEN_POSITION.y)
                         .endTrajectory()
-                        .lineToY(TOKEN_POSITION.y +12)
+                        .lineToY(TOKEN_POSITION.y +12.0)
+                        .build()
                 );
 
         while(!isStopRequested()){}
