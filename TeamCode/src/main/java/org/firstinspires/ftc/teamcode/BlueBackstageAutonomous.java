@@ -35,9 +35,10 @@ public class BlueBackstageAutonomous extends LinearOpMode {
                         .strafeTo(TOKEN_POSITION) //deposit purple pixel
                         .endTrajectory()
                         .strafeTo(new Vector2d(12, 36)) //reverse so we don't move pixel
-                        .splineToSplineHeading(new Pose2d(12, 48, 0), 0)
+                        .setTangent(0)
+                        .splineToSplineHeading(new Pose2d(12, 48, Math.PI/2), 0)
                         //TODO: deposit yellow pixel on backdrop
-                        .splineTo(PARKING_POSITION, 0) //park
+                        .splineToSplineHeading(new Pose2d(PARKING_POSITION, Math.PI/2), 0) //park
                         .build()
         );
     }
