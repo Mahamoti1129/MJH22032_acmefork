@@ -6,13 +6,12 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 @Autonomous(name="Blue Audience Auto", group="Autonomous")
 public class BlueAudienceAutonomous extends LinearOpMode {
 
-    private final Pose2d STARTING_POSITION = new Pose2d(-36, 60, -Math.PI/2);
+    private final Pose2d STARTING_POSITION = new Pose2d(-36, 72, -Math.PI/2);
     private final Vector2d PARKING_POSITION = new Vector2d(60, 12);
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,8 +23,7 @@ public class BlueAudienceAutonomous extends LinearOpMode {
 
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
-                        .lineToY(24)
-                        .splineToSplineHeading(new Pose2d(-24, 12, 0), 0)
+                        .lineToY(PARKING_POSITION.y)
                         .strafeTo(PARKING_POSITION)
                         .build()
         );

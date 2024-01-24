@@ -6,7 +6,6 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 @Autonomous(name="Blue Backstage Auto", group="Autonomous")
@@ -17,7 +16,7 @@ public class BlueBackstageAutonomous extends LinearOpMode {
     private final Vector2d TOKEN_POSITION_LEFT = new Vector2d(24, 36);
     private final Vector2d TOKEN_POSITION_CENTER = new Vector2d(12, 24);
     private final Vector2d TOKEN_POSITION_RIGHT = new Vector2d(0, 36);
-    private final Vector2d PARKING_POSITION = new Vector2d(60, 60);
+    private final Vector2d PARKING_POSITION = new Vector2d(72, 60);
 
     private Vector2d TOKEN_POSITION = TOKEN_POSITION_CENTER;  //default to center, override with detected value if needed
     private Integer APRILTAG_VALUE = 2;  //default to center, override with detected value if needed
@@ -32,13 +31,7 @@ public class BlueBackstageAutonomous extends LinearOpMode {
 
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
-                        .strafeTo(TOKEN_POSITION) //deposit purple pixel
-                        .endTrajectory()
-                        .strafeTo(new Vector2d(12, 36)) //reverse so we don't move pixel
-                        .setTangent(0)
-                        .splineToSplineHeading(new Pose2d(12, 48, Math.PI/2), 0)
-                        //TODO: deposit yellow pixel on backdrop
-                        .splineToSplineHeading(new Pose2d(PARKING_POSITION, Math.PI/2), 0) //park
+                        .splineToLinearHeading(new Pose2d(PARKING_POSITION, -Math.PI/2), 0d)
                         .build()
         );
     }

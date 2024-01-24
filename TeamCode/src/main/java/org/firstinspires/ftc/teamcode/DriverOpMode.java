@@ -35,10 +35,10 @@ public class DriverOpMode extends LinearOpMode {
             }
 */
 
-            if (gamepad2.left_stick_x > 0){
-                gRex.arm.setTargetUp(gamepad2.left_stick_x);
-            }else if (gamepad2.left_stick_x < 0){
-                gRex.arm.setTargetDown(gamepad2.left_stick_x);
+            if (gamepad2.left_stick_y > 0){
+                gRex.arm.setTargetUp(gamepad2.left_stick_y);
+            }else if (gamepad2.left_stick_y < 0){
+                gRex.arm.setTargetDown(gamepad2.left_stick_y);
             }
             gRex.arm.moveArm();
 
@@ -48,14 +48,21 @@ public class DriverOpMode extends LinearOpMode {
                 gRex.arm.moveWristDown();
             }
 
+            if (gamepad2.a){
+                gRex.arm.killArmMotor();
+            }
+
+            if (gamepad2.b){
+                gRex.arm.setEncoderEndpoint();
+            }
+
             gRex.drive.updatePoseEstimate();
 
             telemetry.addData("x", gRex.drive.pose.position.x);
             telemetry.addData("y", gRex.drive.pose.position.y);
             telemetry.addData("heading", gRex.drive.pose.heading);
 
-            telemetry.addData("left trigger", gamepad2.left_trigger);
-            telemetry.addData("right trigger", gamepad2.right_trigger);
+            telemetry.addData("left stick x", gamepad2.left_stick_y);
             telemetry.addData("arm position", gRex.arm.getCurrentPosition());
 
             telemetry.addData("left bumper", gamepad2.left_bumper);

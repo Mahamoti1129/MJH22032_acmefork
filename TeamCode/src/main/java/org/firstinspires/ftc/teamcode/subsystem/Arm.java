@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -15,15 +16,18 @@ public class Arm extends SubsystemBase {
     private final Servo wristServo;
     private final DcMotorEx armMotor;
     public static class ArmPidControllerConstants {
-        public double p = 0.003, i, d, f = 0.001;
+        public double p = 0.008,
+                i = 0.02,
+                d = 0.0001,
+                f = 0.001;
     }
     public static ArmPidControllerConstants ARM_PID_PARAMS = new ArmPidControllerConstants();
 
     private final PIDFController armPidController;
 
     public static double target;
-    public static int armBottom = 70;
-    public static int armTop = 185;
+    public static int armBottom = 0;
+    public static int armTop = 225;
     public static int verticalPos = 250;
 
     public static double wristMoveStep = 0.015;
@@ -34,6 +38,7 @@ public class Arm extends SubsystemBase {
 
         armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
         target = 0;
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         armPidController = new PIDFController(
                 ARM_PID_PARAMS.p, ARM_PID_PARAMS.i,
@@ -42,10 +47,10 @@ public class Arm extends SubsystemBase {
     }
 
     public void setTargetUp(double input){
-        target += ((armTop - target) * input);
+        target += ((armTop - target) * Math.pow(input/4, 2));
     }
     public void setTargetDown(double input){
-        target -= ((target - armBottom) * input);
+        target -= ((target - armBottom) * Math.pow(input/4, 2));
     }
     public void moveArm(){
         int armPos = armMotor.getCurrentPosition();
@@ -73,5 +78,16 @@ public class Arm extends SubsystemBase {
     public void moveWristUp(){
 //        wristServo.setPosition(Math.max(wristServo.getPosition()-wristMoveStep, 0.3));
         wristServo.setPosition(wristServo.getPosition()-wristMoveStep);
+    }
+
+    public void killArmMotor(){
+        armMotor.setMotorDisable();
+    }
+
+    public void setEncoderEndpoint(){
+        armMotor.setMotorDisable();
+        armMotor.setTargetPosition(0);
+        armMotor.setMotorEnable();
+        target = 0;
     }
 }
