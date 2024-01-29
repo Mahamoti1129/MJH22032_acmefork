@@ -7,7 +7,9 @@ import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 @TeleOp(name="Driver Mode", group="TeleOp")
@@ -46,6 +48,10 @@ public class DriverOpMode extends LinearOpMode {
                 gRex.arm.moveWristUp();
             }else if (gamepad2.left_bumper){
                 gRex.arm.moveWristDown();
+            }
+
+            if (gamepad2.y){
+                gRex.droneLauncher.launch();
             }
 
             if (gamepad2.a){
