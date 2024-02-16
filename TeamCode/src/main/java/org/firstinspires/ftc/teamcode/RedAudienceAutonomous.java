@@ -24,7 +24,8 @@ public class RedAudienceAutonomous extends LinearOpMode {
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
                         .lineToY(PARKING_POSITION.y)
-                        .strafeTo(PARKING_POSITION)
+                        .turnTo(0)
+                        .lineToX(PARKING_POSITION.x)
                         .build()
         );
     }

@@ -7,9 +7,7 @@ import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.subsystem.DroneLauncher;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
 @TeleOp(name="Driver Mode", group="TeleOp")
@@ -30,12 +28,6 @@ public class DriverOpMode extends LinearOpMode {
                     ),
                     -gamepad1.right_stick_x
             ));
-
-/*
-            if (gamepad1.left_bumper){
-                gRex.droneLauncher.launch();
-            }
-*/
 
             if (gamepad2.left_stick_y > 0){
                 gRex.arm.setTargetUp(gamepad2.left_stick_y);
@@ -73,6 +65,8 @@ public class DriverOpMode extends LinearOpMode {
 
             telemetry.addData("left bumper", gamepad2.left_bumper);
             telemetry.addData("right bumper", gamepad2.right_bumper);
+
+            telemetry.addData("drone servo pos", gRex.droneLauncher.getPosition());
             telemetry.update();
         }
     }
