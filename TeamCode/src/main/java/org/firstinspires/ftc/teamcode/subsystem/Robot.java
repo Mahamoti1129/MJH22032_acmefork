@@ -14,6 +14,6 @@ public class Robot {
         drive = new MecanumDrive(hardwareMap, pose);
         arm = new Arm(hardwareMap);
         droneLauncher = new DroneLauncher(hardwareMap);
-//        camera = new Camera(hardwareMap);gg
+//        camera = new Camera(hardwareMap);
     }
 }

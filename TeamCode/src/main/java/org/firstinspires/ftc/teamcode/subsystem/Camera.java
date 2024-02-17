@@ -13,12 +13,14 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import java.util.Optional;
 
 public class Camera {
-    private static final String TFOD_MODEL_ASSET_RED = "red_token_model.tflite";
-    private static final String TFOD_MODEL_ASSET_BLUE = "blue_token_model.tflite";
+//    private static final String TFOD_MODEL_ASSET_RED = "red_token_model.tflite";
+//    private static final String TFOD_MODEL_ASSET_BLUE = "blue_token_model.tflite";
+      private static final String TFOD_MODEL_ASSET_PROP = "red_and_blue_prop_model.tflite";
     private static final String[] LABELS = {
-            "Red Token Training",
+            "Red and Blue Prop Training"
+//            "Red Token Training",
 //            "Blue Token Training",
-            "Pixel",
+//            "Pixel",
     };
 
     private final TfodProcessor tfodProcessor = new TfodProcessor.Builder()

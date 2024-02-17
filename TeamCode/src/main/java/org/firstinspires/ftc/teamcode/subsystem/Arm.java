@@ -71,6 +71,9 @@ public class Arm extends SubsystemBase {
     public int getCurrentPosition() {
         return armMotor.getCurrentPosition();
     }
+    public double getCurrentWristPosition() {
+        return wristServo.getPosition();
+    }
 
     public void moveWristDown(){
         wristServo.setPosition(wristServo.getPosition()+wristMoveStep);
