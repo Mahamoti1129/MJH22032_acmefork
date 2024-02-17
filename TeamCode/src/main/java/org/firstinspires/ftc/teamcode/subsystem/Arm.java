@@ -17,7 +17,7 @@ public class Arm extends SubsystemBase {
     private final DcMotorEx armMotor;
     public static class ArmPidControllerConstants {
         public double p = 0.008,
-                i = 0.02,
+                i = 0.002,
                 d = 0.0001,
                 f = 0.001;
     }
@@ -26,7 +26,7 @@ public class Arm extends SubsystemBase {
     private final PIDFController armPidController;
 
     public static double target;
-    public static int armBottom = 0;
+    public static int armBottom = 100;
     public static int armTop = 225;
     public static int verticalPos = 250;
 
