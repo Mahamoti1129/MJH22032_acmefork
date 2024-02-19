@@ -16,15 +16,16 @@ public class Camera {
 //    private static final String TFOD_MODEL_ASSET_RED = "red_token_model.tflite";
 //    private static final String TFOD_MODEL_ASSET_BLUE = "blue_token_model.tflite";
       private static final String TFOD_MODEL_ASSET_PROP = "red_and_blue_prop_model.tflite";
+
     private static final String[] LABELS = {
-            "Red and Blue Prop Training"
-//            "Red Token Training",
-//            "Blue Token Training",
-//            "Pixel",
+            "BlueToken",
+            "Pixel",
+            "RedToken"
     };
 
+    private static final float CONFIDENCE = 0.9f;
     private final TfodProcessor tfodProcessor = new TfodProcessor.Builder()
-            .setModelAssetName(TFOD_MODEL_ASSET_RED)
+            .setModelAssetName(TFOD_MODEL_ASSET_PROP)
             .setModelLabels(LABELS)
             .build();
     private final AprilTagProcessor aprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults();
@@ -48,22 +49,13 @@ public class Camera {
         return Optional.empty();
     }
 
-    public Optional<Recognition> findTokenPosition(){
-        /* TODO: get token position using tfodProcessor
-        for (Recognition recognition: tfodProcessor.getRecognitions()){
-            if(recognition.getConfidence() > PARAMS.getMinimumConfidence()){
-                double degrees = recognition.estimateAngleToObject(AngleUnit.DEGREES);
+    public Optional<Recognition> findRecognition(){
 
-                if (degrees < -PARAMS.getCenterWidth()/2){
-                    return Optional.of(TokenPosition.LEFT);
-                }else if (degrees > PARAMS.getCenterWidth()/2){
-                    return Optional.of(TokenPosition.RIGHT);
-                }else {
-                    return Optional.of(TokenPosition.CENTER);
-                }
+        for(Recognition recognition: tfodProcessor.getRecognitions()){
+            if (recognition.getConfidence() > CONFIDENCE) {
+                return Optional.of(recognition);
             }
         }
-        */
         return Optional.empty();
     }
 }

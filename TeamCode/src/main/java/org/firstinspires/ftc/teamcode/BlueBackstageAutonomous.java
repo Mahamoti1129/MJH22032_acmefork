@@ -27,6 +27,15 @@ public class BlueBackstageAutonomous extends LinearOpMode {
         // replaces waitForStart() and enables camera searching before runtime
         while (!isStarted() && !isStopRequested()){
             //TODO: locate pixel or token, save values for purple/yellow pixel deposits
+            gRex.camera.findRecognition().ifPresent(r -> {
+                if (r.getLeft() <= 123){
+                    TOKEN_POSITION = TOKEN_POSITION_LEFT;
+                }else if (r.getLeft() <= 1231){
+                    TOKEN_POSITION = TOKEN_POSITION_CENTER;
+                }else {
+                    TOKEN_POSITION = TOKEN_POSITION_RIGHT;
+                }
+            });
         }
 
         Actions.runBlocking(
