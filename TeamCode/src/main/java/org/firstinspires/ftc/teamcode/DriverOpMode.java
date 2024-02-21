@@ -23,17 +23,17 @@ public class DriverOpMode extends LinearOpMode {
         while (opModeIsActive()) {
             gRex.drive.setDrivePowers(new PoseVelocity2d(
                     new Vector2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x
+                            gamepad1.left_stick_y,
+                            gamepad1.left_stick_x
                     ),
-                    -gamepad1.right_stick_x
+                    gamepad1.right_stick_x
             ));
 
-/*
-            if (gamepad1.left_bumper){
+
+            if (gamepad2.y){
                 gRex.droneLauncher.launch();
             }
-*/
+
 
             if (gamepad2.left_stick_y > 0){
                 gRex.arm.setTargetUp(gamepad2.left_stick_y);
@@ -62,7 +62,7 @@ public class DriverOpMode extends LinearOpMode {
             telemetry.addData("y", gRex.drive.pose.position.y);
             telemetry.addData("heading", gRex.drive.pose.heading);
 
-            telemetry.addData("left stick x", gamepad2.left_stick_y);
+            telemetry.addData("left stick y", gamepad2.left_stick_y);
             telemetry.addData("arm position", gRex.arm.getCurrentPosition());
 
             telemetry.addData("left bumper", gamepad2.left_bumper);
