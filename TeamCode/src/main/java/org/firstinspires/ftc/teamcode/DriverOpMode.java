@@ -10,17 +10,19 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
+/** @noinspection unused*/
 @TeleOp(name="Driver Mode", group="TeleOp")
 public class DriverOpMode extends LinearOpMode {
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         Robot gRex = new Robot(hardwareMap, new Pose2d(0, 0, 0));
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         waitForStart();
 
         while (opModeIsActive()) {
+            //noinspection SuspiciousNameCombination
             gRex.drive.setDrivePowers(new PoseVelocity2d(
                     new Vector2d(
                             gamepad1.left_stick_y,
@@ -54,6 +56,12 @@ public class DriverOpMode extends LinearOpMode {
 
             if (gamepad2.b){
                 gRex.arm.setEncoderEndpoint();
+            }
+
+            if (Math.abs(gamepad2.right_stick_y) > 0.2) {
+                gRex.lift.move(gamepad2.right_stick_y);
+            }else {
+                gRex.lift.move(0);
             }
 
             gRex.drive.updatePoseEstimate();

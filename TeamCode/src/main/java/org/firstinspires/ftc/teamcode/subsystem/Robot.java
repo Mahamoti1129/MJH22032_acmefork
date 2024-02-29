@@ -8,10 +8,13 @@ public class Robot {
     public final DroneLauncher droneLauncher;
     public final Arm arm;
     public final Camera camera;
+
+    public final Lift lift;
     public Robot(HardwareMap hardwareMap, Pose2d pose){
         drive = new MecanumDrive(hardwareMap, pose);
         arm = new Arm(hardwareMap);
         droneLauncher = new DroneLauncher(hardwareMap);
         camera = new Camera(hardwareMap);
+        lift = new Lift(hardwareMap);
     }
 }

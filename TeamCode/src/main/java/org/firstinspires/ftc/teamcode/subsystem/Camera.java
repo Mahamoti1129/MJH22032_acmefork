@@ -16,9 +16,10 @@ public class Camera {
     private static final String TFOD_MODEL_ASSET = "red_and_blue_model.tflite";
     private static final String[] TFOD_LABELS = {
             "BlueProp",
-            "Pixel",
             "RedProp"
         };
+
+    private static final double CONFIDENCE = 0.9;
 
     private final TfodProcessor tfodProcessor = new TfodProcessor.Builder()
             .setModelAssetName(TFOD_MODEL_ASSET)
@@ -44,22 +45,13 @@ public class Camera {
         return Optional.empty();
     }
 
-    public Optional<Recognition> findTokenPosition(){
-        /* TODO: get token position using tfodProcessor
+    public Optional<Recognition> findTokenRecognition(){
         for (Recognition recognition: tfodProcessor.getRecognitions()){
-            if(recognition.getConfidence() > PARAMS.getMinimumConfidence()){
-                double degrees = recognition.estimateAngleToObject(AngleUnit.DEGREES);
-
-                if (degrees < -PARAMS.getCenterWidth()/2){
-                    return Optional.of(TokenPosition.LEFT);
-                }else if (degrees > PARAMS.getCenterWidth()/2){
-                    return Optional.of(TokenPosition.RIGHT);
-                }else {
-                    return Optional.of(TokenPosition.CENTER);
-                }
+            if(recognition.getConfidence() > CONFIDENCE){
+                return Optional.of(recognition);
             }
         }
-        */
+
         return Optional.empty();
     }
 }
