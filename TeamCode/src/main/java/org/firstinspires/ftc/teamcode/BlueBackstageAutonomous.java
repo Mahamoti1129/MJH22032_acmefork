@@ -1,13 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
+import java.util.Optional;
+
+/** @noinspection unused*/
 @Autonomous(name="Blue Backstage Auto", group="Autonomous")
 public class BlueBackstageAutonomous extends LinearOpMode {
 
@@ -22,20 +28,26 @@ public class BlueBackstageAutonomous extends LinearOpMode {
     private Integer APRILTAG_VALUE = 2;  //default to center, override with detected value if needed
     @Override
     public void runOpMode() throws InterruptedException {
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         Robot gRex = new Robot (hardwareMap, STARTING_POSITION);
 
         // replaces waitForStart() and enables camera searching before runtime
         while (!isStarted() && !isStopRequested()){
-            //TODO: locate pixel or token, save values for purple/yellow pixel deposits
-            gRex.camera.findRecognition().ifPresent(r -> {
-                if (r.getLeft() <= 123){
+            Optional<Recognition> oRec = gRex.camera.findTokenRecognition();
+            if (oRec.isPresent()){
+                if (oRec.get().getLeft() < 200){
                     TOKEN_POSITION = TOKEN_POSITION_LEFT;
-                }else if (r.getLeft() <= 1231){
-                    TOKEN_POSITION = TOKEN_POSITION_CENTER;
                 }else {
-                    TOKEN_POSITION = TOKEN_POSITION_RIGHT;
+                    TOKEN_POSITION = TOKEN_POSITION_CENTER;
                 }
-            });
+
+                telemetry.addData("token left: ", oRec.get().getLeft());
+            }else {
+                TOKEN_POSITION = TOKEN_POSITION_RIGHT;
+            }
+
+            telemetry.addData("token position: ", TOKEN_POSITION);
+            telemetry.update();
         }
 
         Actions.runBlocking(

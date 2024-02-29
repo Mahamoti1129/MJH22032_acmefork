@@ -13,24 +13,20 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import java.util.Optional;
 
 public class Camera {
-//    private static final String TFOD_MODEL_ASSET_RED = "red_token_model.tflite";
-//    private static final String TFOD_MODEL_ASSET_BLUE = "blue_token_model.tflite";
-      private static final String TFOD_MODEL_ASSET_PROP = "red_and_blue_prop_model.tflite";
+    private static final String TFOD_MODEL_ASSET = "red_and_blue_model.tflite";
+    private static final String[] TFOD_LABELS = {
+            "BlueProp",
+            "RedProp"
+        };
 
-    private static final String[] LABELS = {
-            "BlueToken",
-            "Pixel",
-            "RedToken"
-    };
+    private static final double CONFIDENCE = 0.9;
 
-    private static final float CONFIDENCE = 0.9f;
     private final TfodProcessor tfodProcessor = new TfodProcessor.Builder()
-            .setModelAssetName(TFOD_MODEL_ASSET_PROP)
-            .setModelLabels(LABELS)
+            .setModelAssetName(TFOD_MODEL_ASSET)
+            .setModelLabels(TFOD_LABELS)
             .build();
     private final AprilTagProcessor aprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults();
     private final VisionPortal visionPortal;
-
     public Camera(HardwareMap hardwareMap){
         WebcamName camera = hardwareMap.get(WebcamName.class, "Webcam 1");
         visionPortal = VisionPortal.easyCreateWithDefaults(
@@ -49,13 +45,13 @@ public class Camera {
         return Optional.empty();
     }
 
-    public Optional<Recognition> findRecognition(){
-
-        for(Recognition recognition: tfodProcessor.getRecognitions()){
-            if (recognition.getConfidence() > CONFIDENCE) {
+    public Optional<Recognition> findTokenRecognition(){
+        for (Recognition recognition: tfodProcessor.getRecognitions()){
+            if(recognition.getConfidence() > CONFIDENCE){
                 return Optional.of(recognition);
             }
         }
+
         return Optional.empty();
     }
 }

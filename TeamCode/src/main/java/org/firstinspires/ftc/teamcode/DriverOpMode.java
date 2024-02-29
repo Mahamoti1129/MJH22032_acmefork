@@ -10,24 +10,32 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Robot;
 
+/** @noinspection unused*/
 @TeleOp(name="Driver Mode", group="TeleOp")
 public class DriverOpMode extends LinearOpMode {
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         Robot gRex = new Robot(hardwareMap, new Pose2d(0, 0, 0));
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         waitForStart();
 
         while (opModeIsActive()) {
+            //noinspection SuspiciousNameCombination
             gRex.drive.setDrivePowers(new PoseVelocity2d(
                     new Vector2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x
+                            gamepad1.left_stick_y,
+                            gamepad1.left_stick_x
                     ),
-                    -gamepad1.right_stick_x
+                    gamepad1.right_stick_x
             ));
+
+
+            if (gamepad2.y){
+                gRex.droneLauncher.launch();
+            }
+
 
             if (gamepad2.left_stick_y > 0){
                 gRex.arm.setTargetUp(gamepad2.left_stick_y);
@@ -42,10 +50,6 @@ public class DriverOpMode extends LinearOpMode {
                 gRex.arm.moveWristDown();
             }
 
-            if (gamepad2.y){
-                gRex.droneLauncher.launch();
-            }
-
             if (gamepad2.a){
                 gRex.arm.killArmMotor();
             }
@@ -54,19 +58,23 @@ public class DriverOpMode extends LinearOpMode {
                 gRex.arm.setEncoderEndpoint();
             }
 
+            if (Math.abs(gamepad2.right_stick_y) > 0.2) {
+                gRex.lift.move(gamepad2.right_stick_y);
+            }else {
+                gRex.lift.move(0);
+            }
+
             gRex.drive.updatePoseEstimate();
 
             telemetry.addData("x", gRex.drive.pose.position.x);
             telemetry.addData("y", gRex.drive.pose.position.y);
             telemetry.addData("heading", gRex.drive.pose.heading);
 
-            telemetry.addData("left stick x", gamepad2.left_stick_y);
+            telemetry.addData("left stick y", gamepad2.left_stick_y);
             telemetry.addData("arm position", gRex.arm.getCurrentPosition());
 
             telemetry.addData("left bumper", gamepad2.left_bumper);
             telemetry.addData("right bumper", gamepad2.right_bumper);
-
-            telemetry.addData("drone servo pos", gRex.droneLauncher.getPosition());
             telemetry.update();
         }
     }
