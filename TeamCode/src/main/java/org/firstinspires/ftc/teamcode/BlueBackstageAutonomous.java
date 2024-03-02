@@ -18,11 +18,10 @@ import java.util.Optional;
 public class BlueBackstageAutonomous extends LinearOpMode {
 
     private final Pose2d STARTING_POSITION = new Pose2d(12, 66, -Math.PI/2);
-
-    private final Pose2d TOKEN_POSITION_LEFT = new Pose2d(24, 36, -Math.PI/4);
+    private final Pose2d TOKEN_POSITION_LEFT = new Pose2d(24, 30, -Math.PI /4);
     private final Pose2d TOKEN_POSITION_CENTER = new Pose2d(18, 30, -Math.PI/2);
     private final Pose2d TOKEN_POSITION_RIGHT = new Pose2d(0, 36, -Math.PI * 5/2);
-    private final Vector2d PARKING_POSITION = new Vector2d(72, 66);
+    private final Vector2d PARKING_POSITION = new Vector2d(66, 66);
 
     private Pose2d TOKEN_POSITION = TOKEN_POSITION_CENTER;  //default to center, override with detected value if needed
     private Integer APRILTAG_VALUE = 2;  //default to center, override with detected value if needed
@@ -52,9 +51,9 @@ public class BlueBackstageAutonomous extends LinearOpMode {
 
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
-                        .splineToLinearHeading(TOKEN_POSITION, 0d)
+                        .splineToLinearHeading(TOKEN_POSITION, 0)
                         .setReversed(true)
-                        .splineToLinearHeading(STARTING_POSITION, 0d)
+                        .splineToLinearHeading(STARTING_POSITION, -Math.PI/2)
                         .setReversed(false)
                         .splineToLinearHeading(new Pose2d(PARKING_POSITION, -Math.PI/2), 0d)
                         .build()
