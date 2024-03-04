@@ -51,10 +51,10 @@ public class BlueBackstageAutonomous extends LinearOpMode {
 
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
-                        .splineToLinearHeading(TOKEN_POSITION, 0)
-                        .setReversed(true)
-                        .splineToLinearHeading(STARTING_POSITION, -Math.PI/2)
-                        .setReversed(false)
+//                        .splineToLinearHeading(TOKEN_POSITION, 0)
+//                        .setReversed(true)
+//                        .splineToLinearHeading(STARTING_POSITION, -Math.PI/2)
+//                        .setReversed(false)
                         .splineToLinearHeading(new Pose2d(PARKING_POSITION, -Math.PI/2), 0d)
                         .build()
         );

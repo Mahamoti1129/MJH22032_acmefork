@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.subsystem.Robot;
 @Autonomous(name="Red Audience Auto", group="Autonomous")
 public class RedAudienceAutonomous extends LinearOpMode {
 
-    private final Pose2d STARTING_POSITION = new Pose2d(-36,-72,Math.PI/2);
-    private final Vector2d PARKING_POSITION = new Vector2d(60, -12);
+    private final Pose2d STARTING_POSITION = new Pose2d(-36,-78,Math.PI/2);
+    private final Vector2d PARKING_POSITION = new Vector2d(72, -12);
     @Override
     public void runOpMode() throws InterruptedException {
         Robot gRex = new Robot(hardwareMap, STARTING_POSITION);

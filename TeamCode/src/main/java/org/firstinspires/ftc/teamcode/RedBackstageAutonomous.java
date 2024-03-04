@@ -44,10 +44,10 @@ public class RedBackstageAutonomous extends LinearOpMode {
 
         Actions.runBlocking(
                 gRex.drive.actionBuilder(STARTING_POSITION)
-                        .splineToLinearHeading(TOKEN_POSITION, 0d)
-                        .setReversed(true)
-                        .splineToLinearHeading(STARTING_POSITION, 0d)
-                        .setReversed(false)
+//                        .splineToLinearHeading(TOKEN_POSITION, 0d)
+//                        .setReversed(true)
+//                        .splineToLinearHeading(STARTING_POSITION, 0d)
+//                        .setReversed(false)
                         .splineToLinearHeading(PARKING_POSITION, 0d)
                         .build()
         );
