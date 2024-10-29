@@ -10,11 +10,18 @@ public class TeleOpMode extends OpMode {
     @Override
     public void init() {
         robot = new TheRobot(hardwareMap, gamepad1, gamepad2, telemetry);
+
+        telemetry.addData("Robot Status", "Initializing TeleOp OpMode");
     }
 
     @Override
     public void init_loop(){
 
+    }
+
+    @Override
+    public void start() {
+        telemetry.addData("Robot Status", "Running TeleOp OpMode");
     }
 
     @Override
@@ -24,6 +31,7 @@ public class TeleOpMode extends OpMode {
 
     @Override
     public void stop() {
+        telemetry.addData("Robot Status", "Stopping TeleOp OpMode");
         robot.onStop();
         robot.reset();
     }

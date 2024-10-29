@@ -17,6 +17,8 @@ public class DriveTrain extends SubsystemBase {
     private Motor backRightDrive;
     private GamepadEx driveController;
     private Telemetry xtelemetry;
+    private double controllerLeftY;
+    private double controllerRightX;
  public DriveTrain(HardwareMap hardwaremap, Telemetry htelemetry, GamepadEx controller1) {
      frontLeftDrive = new Motor(hardwaremap, "frontleft");
      frontRightDrive = new Motor(hardwaremap, "frontright");
@@ -32,6 +34,34 @@ public class DriveTrain extends SubsystemBase {
  }
 
  @Override
- public void periodic() { }
+ public void periodic() {
+    getJoystickValues();
+    drive(controllerLeftY, controllerRightX);
+ }
+ private void getJoystickValues() {
+     controllerRightX = driveController.getRightX();
+     controllerLeftY = driveController.getLeftY();
+ }
+ private void drive(double forwardPower, double turnPower) {
+     double leftPower = forwardPower + turnPower;
+     double rightPower = forwardPower - turnPower;//might be inverted
+     double maxPower = Math.max(leftPower, rightPower);
+     if (maxPower > 1) {
+         leftPower /= maxPower;
+         rightPower /= maxPower;
+
+     }
+     frontLeftDrive.set(leftPower);
+     backLeftDrive.set(leftPower);
+     frontRightDrive.set(rightPower);
+     backRightDrive.set(rightPower);
+
+ }
+ public void stopDrive() {
+     frontLeftDrive.set(0.0);
+     backLeftDrive.set(0.0);
+     frontRightDrive.set(0.0);
+     backRightDrive.set(0.0);
+ }
 
 }
