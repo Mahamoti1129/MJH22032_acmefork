@@ -25,6 +25,8 @@ public class DriveTrain extends SubsystemBase {
      backLeftDrive = new Motor(hardwaremap, "backleft");
      backRightDrive = new Motor(hardwaremap, "backright");
 
+    frontLeftDrive.setInverted(true);
+    backLeftDrive.setInverted(true);
      frontLeftDrive.setRunMode(Motor.RunMode.RawPower);
      frontRightDrive.setRunMode(Motor.RunMode.RawPower);
      backLeftDrive.setRunMode(Motor.RunMode.RawPower);
@@ -36,6 +38,8 @@ public class DriveTrain extends SubsystemBase {
  @Override
  public void periodic() {
     getJoystickValues();
+     xtelemetry.addData("conrollerLeftY", controllerLeftY);
+     xtelemetry.addData("controllerRightX", controllerRightX);
     drive(controllerLeftY, controllerRightX);
  }
  private void getJoystickValues() {
