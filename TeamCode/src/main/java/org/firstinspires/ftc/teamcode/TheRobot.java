@@ -4,7 +4,7 @@ import com.arcrobotics.ftclib.command.Robot;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.sobsystems.DriveTrain;
+import org.firstinspires.ftc.teamcode.subsystems.DriveTrain;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -22,5 +22,7 @@ public class TheRobot extends Robot {
         controller2 = new GamepadEx(gamepad2);
         drivetrain = new DriveTrain(hardwareMap, telemetry, controller1);
     }
-        public void onStop() {}
+        public void onStop() {
+            drivetrain.stopDrive();
+        }
 }
