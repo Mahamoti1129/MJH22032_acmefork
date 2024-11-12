@@ -1,4 +1,9 @@
 package org.firstinspires.ftc.teamcode;
+/*
+in command line, run: adb connect 192.168.43.1:5555
+to check that it is connected, run: adb devices -l
+password for driver hub is mjheaglebots
+*/
 
 import com.arcrobotics.ftclib.command.Robot;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;

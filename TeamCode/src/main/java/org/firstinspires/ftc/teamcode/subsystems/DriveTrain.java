@@ -25,6 +25,7 @@ public class DriveTrain extends SubsystemBase {
 
  @Override
  public void periodic() {
+     telemetry.addData("mecaum drive", mecanumDrive.toString());
      mecanumDrive.setDrivePowers(new PoseVelocity2d(
              new Vector2d(
                      driveController.getLeftY(),
