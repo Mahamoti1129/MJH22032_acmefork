@@ -29,7 +29,7 @@ public class DriveTrain extends SubsystemBase {
      mecanumDrive.setDrivePowers(new PoseVelocity2d(
              new Vector2d(
                      driveController.getLeftY(),
-                     driveController.getLeftX()
+                     -driveController.getLeftX() // made megative -- untested (attempted to fix inverted strafe)
              ),
              driveController.getRightX()
      ));
