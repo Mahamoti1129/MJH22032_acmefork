@@ -15,17 +15,20 @@ public class DriveTrain extends SubsystemBase {
     private GamepadEx driveController;
     private Telemetry telemetry;
  public DriveTrain(HardwareMap hardwaremap, Telemetry telemetry, GamepadEx controller1) {
+     telemetry.addLine("Initializing drivetrain...");
+
      this.telemetry = telemetry;
      driveController = controller1;
 
      mecanumDrive = new MecanumDrive(hardwaremap, new Pose2d(0.0d, 0.0d, 0.0d));
+
+     telemetry.addLine("Drivetrain initialized.");
  }
 
 
 
  @Override
  public void periodic() {
-     telemetry.addData("mecaum drive", mecanumDrive.toString());
      mecanumDrive.setDrivePowers(new PoseVelocity2d(
              new Vector2d(
                      driveController.getLeftY(),
