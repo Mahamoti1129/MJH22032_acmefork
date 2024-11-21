@@ -10,56 +10,23 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 public class DriveTrain extends SubsystemBase {
-
     private MecanumDrive mecanumDrive;
     private GamepadEx driveController;
     private Telemetry telemetry;
- public DriveTrain(HardwareMap hardwaremap, Telemetry telemetry, GamepadEx controller1) {
-     telemetry.addLine("Initializing drivetrain...");
+     public DriveTrain(HardwareMap hardwaremap, Telemetry telemetry, GamepadEx controller1) {
+         telemetry.addLine("Initializing drivetrain...");
 
-     this.telemetry = telemetry;
-     driveController = controller1;
+         this.telemetry = telemetry;
+         this.driveController = controller1;
 
-     mecanumDrive = new MecanumDrive(hardwaremap, new Pose2d(0.0d, 0.0d, 0.0d));
+         this.mecanumDrive = new MecanumDrive(hardwaremap, new Pose2d(0.0d, 0.0d, 0.0d));
 
-     telemetry.addLine("Drivetrain initialized.");
- }
-
-
-
- @Override
- public void periodic() {
-     mecanumDrive.setDrivePowers(new PoseVelocity2d(
-             new Vector2d(
-                     driveController.getLeftY(),
-                     -driveController.getLeftX() // made megative -- untested (attempted to fix inverted strafe)
-             ),
-             driveController.getRightX()
-     ));
- }
-/*
- private void drive(double forwardPower, double turnPower) {
-     double leftPower = forwardPower + turnPower;
-     double rightPower = forwardPower - turnPower;//might be inverted
-     double maxPower = Math.max(leftPower, rightPower);
-     if (maxPower > 1) {
-         leftPower /= maxPower;
-         rightPower /= maxPower;
-
+         telemetry.addLine("Drivetrain initialized.");
      }
-     frontLeftDrive.set(leftPower);
-     backLeftDrive.set(leftPower);
-     frontRightDrive.set(rightPower);
-     backRightDrive.set(rightPower);
 
- }
- public void stopDrive() {
-     frontLeftDrive.set(0.0);
-     backLeftDrive.set(0.0);
-     frontRightDrive.set(0.0);
-     backRightDrive.set(0.0);
- }
-*/
+    public void setDrivePowers(PoseVelocity2d pose){
+        mecanumDrive.setDrivePowers(pose);
+    }
 
     public void stopDrive() {
         mecanumDrive.stop();

@@ -15,19 +15,19 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class TheRobot extends Robot {
-    private DriveTrain drivetrain;
+    public DriveTrain drivetrain;
 
-    private GamepadEx controller1;
-    private GamepadEx controller2;
-    public static Telemetry telemetry;
+    public GamepadEx driveController;
+    public GamepadEx controller2;
+    public Telemetry telemetry;
 
-    public TheRobot(HardwareMap hardwareMap, Gamepad gamepad1, Gamepad gamepad2, Telemetry telemetry2) {
-        telemetry = telemetry2;
-        controller1 = new GamepadEx(gamepad1);
-        controller2 = new GamepadEx(gamepad2);
-        drivetrain = new DriveTrain(hardwareMap, telemetry, controller1);
+    public TheRobot(HardwareMap hardwareMap, Gamepad driveController, Gamepad gamepad2, Telemetry telemetry) {
+        this.telemetry = telemetry;
+        this.driveController = new GamepadEx(driveController);
+        this.controller2 = new GamepadEx(gamepad2);
+        this.drivetrain = new DriveTrain(hardwareMap, telemetry, this.driveController);
     }
-        public void onStop() {
+    public void onStop() {
             drivetrain.stopDrive();
         }
 }

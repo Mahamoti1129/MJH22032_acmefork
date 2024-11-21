@@ -1,38 +1,22 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.Subsystem;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.TheRobot;
+import org.firstinspires.ftc.teamcode.commands.JoystickDriveCommand;
+
+import java.util.Set;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
-public class TeleOpMode extends OpMode {
+public class TeleOpMode extends CommandOpMode {
     private TheRobot robot;
 
     @Override
-    public void init() {
+    public void initialize() {
         robot = new TheRobot(hardwareMap, gamepad1, gamepad2, telemetry);
 
         telemetry.addData("Robot Status", "Initializing TeleOp OpMode");
-    }
-
-    @Override
-    public void init_loop(){
-
-    }
-
-    @Override
-    public void start() {
-        telemetry.addData("Robot Status", "Running TeleOp OpMode");
-    }
-
-    @Override
-    public void loop() {
-        robot.run();
-    }
-
-    @Override
-    public void stop() {
-        telemetry.addData("Robot Status", "Stopping TeleOp OpMode");
-        robot.onStop();
-        robot.reset();
     }
 }
