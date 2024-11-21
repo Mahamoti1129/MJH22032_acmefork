@@ -18,5 +18,7 @@ public class TeleOpMode extends CommandOpMode {
         robot = new TheRobot(hardwareMap, gamepad1, gamepad2, telemetry);
 
         telemetry.addData("Robot Status", "Initializing TeleOp OpMode");
+
+        schedule(new JoystickDriveCommand(robot.drivetrain, robot.driveController));
     }
 }

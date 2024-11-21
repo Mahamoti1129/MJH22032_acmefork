@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
@@ -30,5 +31,9 @@ public class DriveTrain extends SubsystemBase {
 
     public void stopDrive() {
         mecanumDrive.stop();
+    }
+
+    public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
+        return mecanumDrive.actionBuilder(beginPose);
     }
 }
