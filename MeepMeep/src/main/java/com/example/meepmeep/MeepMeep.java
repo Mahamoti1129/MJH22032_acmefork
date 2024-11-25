@@ -15,6 +15,7 @@ public class MeepMeep {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
+/*
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-24, -72, 0))
                 .lineToX(25)
                 .turn(Math.toRadians(90))
@@ -25,6 +26,9 @@ public class MeepMeep {
                 .lineToY(0)
                 .turn(Math.toRadians(90))
                 .build());
+*/
+
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-24, -72, Math.PI/2)).build());
 
         meepMeep.setBackground(com.noahbres.meepmeep.MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
                 .setDarkMode(true)

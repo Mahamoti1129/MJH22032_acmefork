@@ -25,7 +25,7 @@ public class JoystickDriveCommand extends CommandBase {
         driveTrain.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
                         driveController.getLeftY(),
-                        -driveController.getLeftX() // made megative -- untested (attempted to fix inverted strafe)
+                        -driveController.getLeftX() // made negative -- untested (attempted to fix inverted strafe)
                 ),
                 driveController.getRightX()
         ));
