@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.TheRobot;
 import org.firstinspires.ftc.teamcode.commands.LongParkOnlyCommand;
 import org.firstinspires.ftc.teamcode.commands.ShortParkOnlyCommand;
 
-@Autonomous(name="LongParkOnlyAuto")
+@Autonomous(name="ShortParkOnly", group="Auto")
 public class ShortParkOnlyAutoOpMode extends CommandOpMode {
 
     private TheRobot robot;

@@ -9,33 +9,41 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Arm extends SubsystemBase {
 
-    private DcMotorEx pivotMotor;
-    private DcMotorEx liftMotor;
+    private  DcMotorEx pivotMotor;
+    private  DcMotorEx liftMotor;
 
-    private ServoEx clawServo;
+    private  ServoEx clawServo;
 
-    private Telemetry telemetry;
+    private final Telemetry telemetry;
 
     public Arm(HardwareMap hardwareMap, Telemetry telemetry){
-        this.pivotMotor = hardwareMap.get(DcMotorEx.class, "pivotMotor");
-        this.liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
-        this.clawServo = hardwareMap.get(ServoEx.class, "clawServo");
+//        this.pivotMotor = hardwareMap.get(DcMotorEx.class, "pivotMotor");
+//        this.liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
+//        this.clawServo = hardwareMap.get(ServoEx.class, "clawServo");
         this.telemetry = telemetry;
     }
 
     public void openClaw(){
-        clawServo.setPosition(0d);
+        telemetry.addLine("open claw");
+        telemetry.update();
+        //clawServo.setPosition(0d);
     }
 
     public void closeClaw(){
-        clawServo.setPosition(180d);
+        telemetry.addLine("close claw");
+        telemetry.update();
+        //clawServo.setPosition(180d);
     }
 
     public void pivotArm(double velocity){
-        pivotMotor.setPower(velocity);
+        telemetry.addData("Pivot arm: ", velocity);
+        telemetry.update();
+        // pivotMotor.setPower(velocity);
     }
 
     public void lift(double velocity){
-        liftMotor.setPower(velocity);
+        telemetry.addData("Lift value: ", velocity);
+        telemetry.update();
+        //liftMotor.setPower(velocity);
     }
 }

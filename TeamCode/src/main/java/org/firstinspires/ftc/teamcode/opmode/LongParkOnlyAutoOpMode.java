@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.TheRobot;
 import org.firstinspires.ftc.teamcode.commands.LongParkOnlyCommand;
 
-@Autonomous(name="LongParkOnlyAuto")
+@Autonomous(name="LongParkOnly", group="Auto")
 public class LongParkOnlyAutoOpMode extends CommandOpMode {
 
     private TheRobot robot;

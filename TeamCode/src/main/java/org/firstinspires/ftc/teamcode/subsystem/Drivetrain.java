@@ -9,8 +9,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 public class DriveTrain extends SubsystemBase {
-    private MecanumDrive mecanumDrive;
-    private Telemetry telemetry;
+    private final MecanumDrive mecanumDrive;
+    private final Telemetry telemetry;
      public DriveTrain(HardwareMap hardwaremap, Telemetry telemetry) {
          telemetry.addLine("Initializing drivetrain...");
 
@@ -23,6 +23,8 @@ public class DriveTrain extends SubsystemBase {
 
     public void setDrivePowers(PoseVelocity2d pose){
         mecanumDrive.setDrivePowers(pose);
+        telemetry.addData("Drive powers: ", pose);
+        telemetry.update();
     }
 
     public void stopDrive() {
