@@ -4,13 +4,13 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.command.CommandBase;
 
-import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
+import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
 
 public class LongParkOnlyCommand extends CommandBase {
 
-    private DriveTrain driveTrain;
+    private Drivetrain driveTrain;
 
-    public LongParkOnlyCommand(DriveTrain driveTrain) {
+    public LongParkOnlyCommand(Drivetrain driveTrain) {
         this.driveTrain = driveTrain;
     }
 

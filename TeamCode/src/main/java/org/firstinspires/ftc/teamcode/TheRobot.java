@@ -10,13 +10,13 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
-import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
+import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class TheRobot extends Robot {
-    public DriveTrain drivetrain;
+    public Drivetrain drivetrain;
     public Arm arm;
     public GamepadEx driveController;
     public GamepadEx widgetController;
@@ -26,7 +26,7 @@ public class TheRobot extends Robot {
         this.telemetry = telemetry;
         this.driveController = new GamepadEx(driveController);
         this.widgetController = new GamepadEx(gamepad2);
-        this.drivetrain = new DriveTrain(hardwareMap, telemetry);
+        this.drivetrain = new Drivetrain(hardwareMap, telemetry);
         this.arm = new Arm(hardwareMap, telemetry);
     }
     public void onStop() {

@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
-public class DriveTrain extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
     private final MecanumDrive mecanumDrive;
     private final Telemetry telemetry;
-     public DriveTrain(HardwareMap hardwaremap, Telemetry telemetry) {
+     public Drivetrain(HardwareMap hardwaremap, Telemetry telemetry) {
          telemetry.addLine("Initializing drivetrain...");
 
          this.telemetry = telemetry;

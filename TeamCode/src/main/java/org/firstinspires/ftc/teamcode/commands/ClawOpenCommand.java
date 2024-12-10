@@ -6,7 +6,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.teamcode.subsystem.Arm;
-import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
+import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
 
 public class ClawOpenCommand extends CommandBase {
 
