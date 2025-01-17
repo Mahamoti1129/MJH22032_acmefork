@@ -20,4 +20,5 @@ public class ArmLiftCommand extends CommandBase {
     public void execute() {
         arm.lift(widgetController.getLeftY());
     }
+
 }
