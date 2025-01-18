@@ -19,7 +19,7 @@ public class LiftRunCommand extends CommandBase {
 
     @Override
     public void execute() {
-        lift.lift(widgetController.getLeftY());
+        lift.lift(widgetController.getLeftY(), widgetController.getRightY());
     }
 
 }

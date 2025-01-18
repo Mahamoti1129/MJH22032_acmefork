@@ -26,10 +26,8 @@ public class Lift extends SubsystemBase {
         this.telemetry = telemetry;
     }
 
-    public void lift(double velocity){
-        telemetry.addData("Lift value: ", velocity);
-        telemetry.update();
-        leftMotor.setPower(velocity);
-        rightMotor.setPower(velocity);
+    public void lift(double leftvelocity, double rightvelocity){
+        leftMotor.setPower(leftvelocity);
+        rightMotor.setPower(rightvelocity);
     }
 }
