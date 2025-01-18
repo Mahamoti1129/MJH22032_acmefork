@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.commands.ArmLiftCommand;
 import org.firstinspires.ftc.teamcode.commands.ArmPivotCommand;
 import org.firstinspires.ftc.teamcode.commands.ClawOpenCommand;
 import org.firstinspires.ftc.teamcode.commands.JoystickDriveCommand;
+import org.firstinspires.ftc.teamcode.commands.LiftRunCommand;
 
 import java.util.Set;
 
@@ -39,8 +40,11 @@ public class TeleOpMode extends CommandOpMode {
                 new InstantCommand(() -> robot.arm.closeClaw())
             );
 
-        schedule(new ArmLiftCommand(robot.arm, robot.widgetController));
-        schedule(new ArmPivotCommand(robot.arm, robot.widgetController));
+//        schedule(new ArmLiftCommand(robot.arm, robot.widgetController));
+//        schedule(new ArmPivotCommand(robot.arm, robot.widgetController));
+
+
+        schedule(new LiftRunCommand(robot.lift, robot.widgetController));
 
         telemetry.addLine("Telemetry initialized.");
         telemetry.update();
