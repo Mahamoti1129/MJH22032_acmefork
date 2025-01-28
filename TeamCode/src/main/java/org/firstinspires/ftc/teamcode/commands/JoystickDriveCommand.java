@@ -6,16 +6,16 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.Subsystem;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
-import org.firstinspires.ftc.teamcode.subsystems.DriveTrain;
+import org.firstinspires.ftc.teamcode.subsystem.Drivetrain;
 
 import java.util.Set;
 
 public class JoystickDriveCommand extends CommandBase {
 
-    private final DriveTrain driveTrain;
+    private final Drivetrain driveTrain;
     private final GamepadEx driveController;
 
-    public JoystickDriveCommand(DriveTrain driveTrain, GamepadEx driveController){
+    public JoystickDriveCommand(Drivetrain driveTrain, GamepadEx driveController){
         this.driveTrain = driveTrain;
         this.driveController = driveController;
     }
@@ -24,8 +24,8 @@ public class JoystickDriveCommand extends CommandBase {
     public void execute() {
         driveTrain.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
-                        driveController.getLeftY(),
-                        -driveController.getLeftX() // made negative -- untested (attempted to fix inverted strafe)
+                        -driveController.getLeftY(),
+                        driveController.getLeftX()
                 ),
                 driveController.getRightX()
         ));
