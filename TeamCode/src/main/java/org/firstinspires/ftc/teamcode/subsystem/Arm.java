@@ -25,21 +25,25 @@ public class Arm extends SubsystemBase {
     }
 
     public void openClaw(){
-        telemetry.addLine("open claw");
+        clawServo.setPosition(0.0);
+        telemetry.addData("Arm.class open claw", clawServo.getPosition());
         telemetry.update();
-        clawServo.setPosition(0d);
     }
 
     public void closeClaw(){
-        telemetry.addLine("close claw");
+        clawServo.setPosition(1.0);
+        telemetry.addData("Arm.class close claw", clawServo.getPosition());
         telemetry.update();
-        clawServo.setPosition(1.0d);
+    }
+
+    public void clawPosition(double position){
+        clawServo.setPosition(position);
     }
 
     public void pivotArm(double velocity){
         telemetry.addData("Pivot arm: ", velocity);
         telemetry.update();
-        pivotMotor.setPower(velocity/2);
+        pivotMotor.setPower(velocity);
     }
 
     public void lift(double velocity){

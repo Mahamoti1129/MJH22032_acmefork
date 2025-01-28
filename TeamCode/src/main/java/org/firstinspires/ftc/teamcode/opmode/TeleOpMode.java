@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.TheRobot;
 import org.firstinspires.ftc.teamcode.commands.ArmLiftCommand;
 import org.firstinspires.ftc.teamcode.commands.ArmPivotCommand;
+import org.firstinspires.ftc.teamcode.commands.ClawCloseCommand;
 import org.firstinspires.ftc.teamcode.commands.ClawOpenCommand;
 import org.firstinspires.ftc.teamcode.commands.JoystickDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.LiftRunCommand;
@@ -32,21 +33,27 @@ public class TeleOpMode extends CommandOpMode {
 
         telemetry.addData("Robot Status", "Initializing TeleOp OpMode");
 
-
         schedule(new JoystickDriveCommand(robot.drivetrain, robot.driveController));
 
-        new GamepadButton(robot.widgetController, GamepadKeys.Button.A).toggleWhenPressed(
-                new ClawOpenCommand(robot.arm),
-                new InstantCommand(() -> robot.arm.closeClaw())
-            );
+//        new GamepadButton(robot.widgetController, GamepadKeys.Button.A).toggleWhenPressed(
+//                new InstantCommand(() -> robot.arm.openClaw()),
+//                new InstantCommand(() -> robot.arm.closeClaw())
+//            );
+//        schedule(new ClawOpenCommand(robot.arm, robot.widgetController, telemetry));
 
-//        schedule(new ArmLiftCommand(robot.arm, robot.widgetController));
-//        schedule(new ArmPivotCommand(robot.arm, robot.widgetController));
+        new GamepadButton(robot.widgetController, GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(
+                new ClawOpenCommand(robot.arm, robot.widgetController, telemetry),
+                new ClawCloseCommand(robot.arm, robot.widgetController, telemetry)
+        );
 
+        schedule(new ArmLiftCommand(robot.arm, robot.widgetController));
+        schedule(new ArmPivotCommand(robot.arm, robot.widgetController));
 
         schedule(new LiftRunCommand(robot.lift, robot.widgetController));
 
         telemetry.addLine("Telemetry initialized.");
         telemetry.update();
     }
+
+
 }

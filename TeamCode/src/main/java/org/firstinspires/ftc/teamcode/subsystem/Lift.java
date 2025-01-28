@@ -22,7 +22,7 @@ public class Lift extends SubsystemBase {
         this.rightMotor = hardwareMap.get(DcMotorEx.class, "rightclimb");
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         this.telemetry = telemetry;
     }
 

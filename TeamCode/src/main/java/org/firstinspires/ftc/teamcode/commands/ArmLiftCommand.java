@@ -18,7 +18,7 @@ public class ArmLiftCommand extends CommandBase {
 
     @Override
     public void execute() {
-        arm.lift(widgetController.getLeftY());
+        arm.lift(-widgetController.getLeftY());
     }
 
 }

@@ -18,6 +18,6 @@ public class ArmPivotCommand extends CommandBase {
 
     @Override
     public void execute() {
-        arm.pivotArm(widgetController.getRightY());
+        arm.pivotArm(-widgetController.getRightY());
     }
 }
