@@ -24,7 +24,7 @@ public class JoystickDriveCommand extends CommandBase {
     public void execute() {
         driveTrain.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
-                        -driveController.getLeftY(),
+                        driveController.getLeftY(),
                         driveController.getLeftX()
                 ),
                 driveController.getRightX()
