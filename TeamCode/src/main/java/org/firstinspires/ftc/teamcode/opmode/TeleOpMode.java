@@ -35,12 +35,6 @@ public class TeleOpMode extends CommandOpMode {
 
         schedule(new JoystickDriveCommand(robot.drivetrain, robot.driveController));
 
-//        new GamepadButton(robot.widgetController, GamepadKeys.Button.A).toggleWhenPressed(
-//                new InstantCommand(() -> robot.arm.openClaw()),
-//                new InstantCommand(() -> robot.arm.closeClaw())
-//            );
-//        schedule(new ClawOpenCommand(robot.arm, robot.widgetController, telemetry));
-
         new GamepadButton(robot.widgetController, GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(
                 new ClawOpenCommand(robot.arm, robot.widgetController, telemetry),
                 new ClawCloseCommand(robot.arm, robot.widgetController, telemetry)

@@ -13,32 +13,33 @@ public class Arm extends SubsystemBase {
     private final DcMotorEx pivotMotor;
     private final DcMotorEx liftMotor;
 
-    private final Servo clawServo;
+    private final Servo leftClaw;
+    private final Servo rightClaw;
 
     private final Telemetry telemetry;
 
     public Arm(HardwareMap hardwareMap, Telemetry telemetry){
         this.pivotMotor = hardwareMap.get(DcMotorEx.class, "armlift");
         this.liftMotor = hardwareMap.get(DcMotorEx.class, "armextension");
-        this.clawServo = hardwareMap.get(Servo.class, "claw");
+        this.leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        this.rightClaw = hardwareMap.get(Servo.class, "rightClaw");
         this.telemetry = telemetry;
     }
 
     public void openClaw(){
-        clawServo.setPosition(0.0);
-        telemetry.addData("Arm.class open claw", clawServo.getPosition());
+        leftClaw.setPosition(0.0);
+        rightClaw.setPosition(0.8);
+        telemetry.addLine("claw open");
         telemetry.update();
     }
 
     public void closeClaw(){
-        clawServo.setPosition(1.0);
-        telemetry.addData("Arm.class close claw", clawServo.getPosition());
+        leftClaw.setPosition(0.5);
+        rightClaw.setPosition(0.5);
+        telemetry.addLine("claw closed");
         telemetry.update();
     }
 
-    public void clawPosition(double position){
-        clawServo.setPosition(position);
-    }
 
     public void pivotArm(double velocity){
         telemetry.addData("Pivot arm: ", velocity);

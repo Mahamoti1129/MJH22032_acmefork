@@ -24,10 +24,10 @@ public class JoystickDriveCommand extends CommandBase {
     public void execute() {
         driveTrain.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
-                        driveController.getLeftY(),
-                        driveController.getLeftX()
+                        Math.pow(driveController.getLeftY(), 3),
+                        Math.pow(-driveController.getLeftX(), 3)
                 ),
-                driveController.getRightX()
+                Math.pow(-driveController.getRightX(), 3)
         ));
     }
 }
