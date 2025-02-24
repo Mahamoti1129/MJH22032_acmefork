@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands;
 
+import static com.arcrobotics.ftclib.util.MathUtils.clamp;
+
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
@@ -19,8 +21,14 @@ public class LiftRunCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double left = widgetController.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER),
-                right = widgetController.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        double left = clamp(
+                        Math.pow(widgetController.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), 3),
+                        -0.8,
+                        0.8),
+                right = clamp(
+                        Math.pow(widgetController.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER), 3),
+                        -0.8,
+                        0.8);
 
         if (widgetController.isDown(GamepadKeys.Button.X)) {
             left = -left;

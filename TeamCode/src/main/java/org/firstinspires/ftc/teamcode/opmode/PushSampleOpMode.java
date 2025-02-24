@@ -5,10 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.TheRobot;
 import org.firstinspires.ftc.teamcode.commands.LongParkOnlyCommand;
-import org.firstinspires.ftc.teamcode.commands.ShortParkOnlyCommand;
+import org.firstinspires.ftc.teamcode.commands.PushSampleCommand;
 
-@Autonomous(name="ShortParkOnly", group="Auto")
-public class ShortParkOnlyAutoOpMode extends CommandOpMode {
+@Autonomous(name="PushSampleOnly", group="Auto")
+public class PushSampleOpMode extends CommandOpMode {
 
     private TheRobot robot;
 
@@ -17,6 +17,6 @@ public class ShortParkOnlyAutoOpMode extends CommandOpMode {
         robot = new TheRobot(hardwareMap, gamepad1, gamepad2, telemetry);
         telemetry.addData("Robot Status", "Initializing AutoPark OpMode");
 
-        schedule(new ShortParkOnlyCommand(robot.drivetrain));
+        schedule(new PushSampleCommand(robot.drivetrain));
     }
 }

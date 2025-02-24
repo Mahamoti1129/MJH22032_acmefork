@@ -48,6 +48,4 @@ public class TeleOpMode extends CommandOpMode {
         telemetry.addLine("Telemetry initialized.");
         telemetry.update();
     }
-
-
 }
